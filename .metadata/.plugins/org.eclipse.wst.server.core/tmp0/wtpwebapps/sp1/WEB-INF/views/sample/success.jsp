@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-  success>
+	<h1>Success Jsp</h1>
 </body>
 </html>

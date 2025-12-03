@@ -26,4 +26,5 @@
     <fullyQualifiedTypeName name="org.zerock.controller.mapper.TimeMapper"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
     <fullyQualifiedTypeName name="org.zerock.dto.SampleDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 </qualifiedTypeNameHistroy>
