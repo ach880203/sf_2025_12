@@ -1,0 +1,9 @@
+package org.zerock.mapper;
+
+public interface BoardMapper {
+
+	
+	 public interface BoardMapper{
+		  int insert(BoardDTO dto);
+	 }
+}
