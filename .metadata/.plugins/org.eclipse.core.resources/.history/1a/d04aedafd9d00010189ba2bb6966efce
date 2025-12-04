@@ -1,0 +1,47 @@
+package org.zerock.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Controller
+@Log4j2
+@RequestMapping("/board")
+@RequiredArgsConstructor
+public class BoardController {
+	
+	//localhost:8080/board/ex1 -> WEB-INF/ views / board / ex1.jsp
+	
+	
+	@GetMapping("/list")
+	public void list() {
+		log.info("board list");
+	}
+	//등록화면
+	@GetMapping("register")
+	public void register() {
+		log.info("board register");
+	}
+//등록처리
+	@PostMapping("register")
+	public String registerpost() {
+		log.info("-----------------------");
+		log.info("board register post");
+		return "redirect:/board/list";
+	}
+	
+	
+	//단건조회 localhost:8080/board/read/1 void로 요청을 주면 경로 그대로 따라가기때문에 에러가 난다.
+	//보드에서 1번 데이터 보여주세요. 스트링으로 줌으로서 리턴을 이용해 read.jsp로 갈 수 있다.
+	// WEB-INF/ views / board / read.jsp
+	@GetMapping("/read/{bno}")
+	public String read(@PathVariable("bno") Long bno) {
+		log.info("board read");
+		return "/board/read";
+	}
+}
