@@ -27,7 +27,11 @@
       <c:forEach var="member" items="${memberList}">
     <tr>
       <td><c:out value="${member.mno}"></c:out></td>
-      <td><c:out value="${member.name}"></c:out></td>
+      <td>
+        <a href="/member/read/${member.mno}">
+      	   <c:out value="${member.name}"></c:out>
+      	</a>
+      </td>
       <td><c:out value="${member.email}"></c:out></td>
       <td><c:out value="${member.createdDate}"></c:out></td>
     </tr>
