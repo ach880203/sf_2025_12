@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardMapperTests" project="sp1" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="org.zerock.mapper.BoardMapperTests" time="0.163" displayname="BoardMapperTests" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]">
-    <testcase name="testSelectOne" classname="org.zerock.mapper.BoardMapperTests" time="0.119" displayname="testSelectOne()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testSelectOne()]"/>
-    <testcase name="testDelete" classname="org.zerock.mapper.BoardMapperTests" time="0.011" displayname="testDelete()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testDelete()]"/>
-    <testcase name="testInsert" classname="org.zerock.mapper.BoardMapperTests" time="0.013" displayname="testInsert()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testInsert()]"/>
-    <testcase name="testSelect" classname="org.zerock.mapper.BoardMapperTests" time="0.009" displayname="testSelect()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testSelect()]"/>
-    <testcase name="testUpdate" classname="org.zerock.mapper.BoardMapperTests" time="0.008" displayname="testUpdate()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testUpdate()]"/>
-  </testsuite>
-</testrun>

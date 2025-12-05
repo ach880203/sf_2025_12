@@ -19,5 +19,29 @@ public class BoardService {
 	 
 	 public List<BoardDTO> getList(){
 		 return boardMapper.list();
+		 
+	 }
+
+	 public Long register(BoardDTO dto) {
+		 int insertCounter = boardMapper.insert(dto);
+		 
+		 log.info("insertCounter : " + insertCounter);
+		 
+		return dto.getBno();
+	 }
+
+	 public BoardDTO read(Long bno) {
+		 return boardMapper.selectOne(bno);
+
+	 }
+
+	 public void remove(Long bno) {
+		 boardMapper.remove(bno);
+		
+	 }
+
+	 public void modify(BoardDTO dto) {
+		 	boardMapper.update(dto);
+		 
 	 }
 }

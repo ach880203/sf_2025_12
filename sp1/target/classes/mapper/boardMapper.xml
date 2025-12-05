@@ -33,7 +33,7 @@
 	</update>
 	
 	<select id="list" resultType="BoardDTO">
-		select bno, title, content, regDate
+		select bno, title, writer, content, regDate
 		from tbl_board
 		where delflag = false
 		order by bno desc

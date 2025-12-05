@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardMapperTests" project="sp1" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="org.zerock.mapper.BoardMapperTests" time="0.164" displayname="BoardMapperTests" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]">
-    <testcase name="testSelectOne" classname="org.zerock.mapper.BoardMapperTests" time="0.132" displayname="testSelectOne()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testSelectOne()]"/>
-    <testcase name="testDelete" classname="org.zerock.mapper.BoardMapperTests" time="0.006" displayname="testDelete()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testDelete()]"/>
-    <testcase name="testInsert" classname="org.zerock.mapper.BoardMapperTests" time="0.015" displayname="testInsert()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testInsert()]"/>
-    <testcase name="testUpdate" classname="org.zerock.mapper.BoardMapperTests" time="0.009" displayname="testUpdate()" uniqueid="[engine:junit-jupiter]/[class:org.zerock.mapper.BoardMapperTests]/[method:testUpdate()]"/>
-  </testsuite>
-</testrun>
