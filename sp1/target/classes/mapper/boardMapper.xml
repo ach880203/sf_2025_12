@@ -52,5 +52,8 @@
 	   where bno>0 and delflag = false
 	</select>
 	
+	<select id="listSearch" resultType="BoardDTO">
+	
+	</select>
 	
 </mapper>

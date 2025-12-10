@@ -19,4 +19,17 @@ public interface BoardMapper {
 		  List<BoardDTO> list2(@Param("skip") int skip, @Param("count") int count);
 		  
 		  int listCount();
+		  	
+		  
+		  /*
+		   * T, c, W
+		   * types : tcw -> T|C|W
+		   * keyword : 스프링 검색
+		   */
+		  List<BoardDTO> listSearch(@Param("skip") int skip, 
+		  							@Param("count") int count,
+		  							@Param("type") String[] types,
+		  							@Param("keyword") String keyword);
+		  
+		  
 }

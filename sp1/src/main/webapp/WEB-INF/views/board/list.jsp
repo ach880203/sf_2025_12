@@ -40,8 +40,8 @@
 					<ul class="pagination">
 					
 						<c:if test="${dto.prev}">
-							<li class="page-item disabled">
-								<a class="page-link" href="" tabindex="-1">Prev</a>
+							<li class="page-item">
+								<a class="page-link" href="${dto.start -1}" tabindex="-1">Prev</a>
 							</li>
 						</c:if>
 						
@@ -52,7 +52,8 @@
 						</c:forEach>
 							
 						<c:if test="${dto.next}">
-							<li class="page-item"><a class="page-link" href="#">Next</a>
+							<li class="page-item">
+							  <a class="page-link" href="${dto.end +1}">Next</a>
 						</c:if>
 						
 						</li>
