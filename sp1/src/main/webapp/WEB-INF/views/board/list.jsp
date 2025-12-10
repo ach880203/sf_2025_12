@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file = "/WEB-INF/views/includes/header.jsp" %>
+<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
 <div class="row justify-content-center">
 	<div class="col-lg-12">
@@ -14,48 +14,77 @@
 			<div class="card-body">
 				<table class="table table-boardered" id="dataTable">
 					<thead>
-							<th>Bno</th>
-							<th>Title</th>
-							<th>Writer</th>
-							<th>RegDate</th>
-					</thead>	
+						<th>Bno</th>
+						<th>Title</th>
+						<th>Writer</th>
+						<th>RegDate</th>
+					</thead>
 					<tbody class="tbody">
-						<c:forEach var="board" items="${list}">
+						<c:forEach var="board" items="${dto.boardDTOList}">
 							<tr data-bno=${borad.bno}>
-								<td><c:out value="${board.bno}"/></td>
-								<td>
-									<a href="/board/read/${board.bno}">
-									   <c:out value="${board.title}"/>
-									</a>
-								</td>
-								
-								<td><c:out value="${board.writer}"/></td>
-								<td><c:out value="${board.createdDate}"/></td>
-							</tr>	
+								<td><c:out value="${board.bno}" /></td>
+								<td><a href="/board/read/${board.bno}"> <c:out
+											value="${board.title}" />
+								</a></td>
+
+								<td><c:out value="${board.writer}" /></td>
+								<td><c:out value="${board.createdDate}" /></td>
+							</tr>
 						</c:forEach>
- 					</tbody>
+					</tbody>
 				</table>
+
+				<!-- 페이징 처리 -->
+				
+				<div class="d-flex justify-content-center">
+					<ul class="pagination">
+					
+						<c:if test="${dto.prev}">
+							<li class="page-item disabled">
+								<a class="page-link" href="" tabindex="-1">Prev</a>
+							</li>
+						</c:if>
+						
+						<c:forEach var="num" items="${dto.pageNums}">
+							<li class="page-item ${dto.page == num ? 'active' : '' }">
+							      <a class="page-link" href="${num}">${num}</a>
+							</li>
+						</c:forEach>
+							
+						<c:if test="${dto.next}">
+							<li class="page-item"><a class="page-link" href="#">Next</a>
+						</c:if>
+						
+						</li>
+					</ul>
+				</nav>
+				<!-- end 페이징 처리 -->
+
 			</div>
 		</div>
 	</div>
- </div>
- 
- <div class="modal" tabindex="-1" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><span id="modalResult"></span>번 글이 등록되었습니다.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+</div>
+
+<div class="modal" tabindex="-1" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<span id="modalResult"></span>번 글이 등록되었습니다.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 
@@ -79,9 +108,35 @@
 		
 		myModal.show();
 	}
+	
+	const paginDiv = document.querySelector(".pagination");
+	paginDiv.addEventListener("click", (e) => {
+		
+		//a.테크 기본 동작(페이지 이동) 막기
+		e.preventDefault();
+		
+		//이벤트 버블링 방지(부모 요소로 이벤트 전파 차단)
+		e.stopPropagation();
+		
+		const target = e.target;
+		console.log("---------------------");
+		console.log(target);
+		
+		const targetPage = target.getAttribute("href");
+		const size = ${dto.size} || 10;
+		
+		const params = new URLSearchParams({
+		   page: targetPage,
+		   size: size
+	});
+	
+	self.location = `/board/list?\${params.toString()}`;
+	}, false);
+	
+	
 </script>
-  
-<%@ include file = "/WEB-INF/views/includes/footer.jsp" %>
+
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>
 
 
 

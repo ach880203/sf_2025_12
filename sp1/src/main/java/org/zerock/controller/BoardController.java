@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
+import org.zerock.dto.BoardListPaginDTO;
 import org.zerock.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,18 @@ public class BoardController {
 	// localhost:8080/board/ex1 -> WEB-INF/ views / board / ex1.jsp
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(
+			@RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="size", defaultValue = "10") int size,
+			Model model) {
 		log.info("board list");
 		
-		 List<BoardDTO> boardDtoList = boardService.getList();
-		 model.addAttribute("list", boardDtoList);
+		 BoardListPaginDTO list = boardService.getList(page, size);
+		 
+		 log.info("------------------------");
+		 log.info(list);
+		 
+		 model.addAttribute("dto", list);
 		 
 	}
 

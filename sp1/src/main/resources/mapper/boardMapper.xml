@@ -39,4 +39,18 @@
 		order by bno desc
 	</select>
 
+	<select id="list2" resultType="BoardDTO">
+		select bno, title, writer, content, regDate
+		from tbl_board
+		where delflag = false
+		order by bno desc
+		limit #{count} offset #{skip}
+	</select>
+	
+	<select id="listCount" resultType="int">
+	   select count(bno) from tbl_board
+	   where bno>0 and delflag = false
+	</select>
+	
+	
 </mapper>

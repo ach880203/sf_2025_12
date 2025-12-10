@@ -1,6 +1,7 @@
 package org.zerock.mapper;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -85,8 +86,25 @@ public class BoardMapperTests {
 		//boardMapper.list().forEach(log::info);
 	}
 	
+	@Test
+	public void testpagining() {
+		 int page = 3;
+		 
+		  int skip = (page - 1) * 10;
+		  int count = 10;
+		  
+		  boardMapper.list2(skip,  count)
+		  .forEach(board-> log.info(board));
+		 
+	}
 	
-	
+	@Test
+	public void testPagNums() {
+		//IntStream.rangeClosed(1, 5).boxed().forEach(i -> log.info(i));
+		List<Integer> list = IntStream.rangeClosed(1, 5).boxed().toList();
+		log.info(list);
+		
+	}
 	
 	
 	
