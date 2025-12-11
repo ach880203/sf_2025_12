@@ -53,7 +53,29 @@
 	</select>
 	
 	<select id="listSearch" resultType="BoardDTO">
-	
+	  select bno, title, writer, regDate
+	  from tbl_board
+	  where delflag = false
+	  
+	  <if test="types != null and keyword != null">
+	     <foreach collection="types" item="type" open=" and (" close=")"
+	     separator="or"> 
+	        <if test='type.equals("T")'>
+	        title like CONCAT('%', #{keyword}, '%')
+	        
+	        </if>
+	        	        
+	         <if test='type.equals("C")'>
+	        title like CONCAT('%', #{keyword}, '%')
+	         </if>
+
+	         <if test='type.equals("W")'>
+	        title like CONCAT('%', #{keyword}, '%')	        
+	        </if>
+	     </foreach> 
+	  </if>
+	  ORDER BY bno desc
+	  limit #{skip}, #{count}
 	</select>
 	
 </mapper>
