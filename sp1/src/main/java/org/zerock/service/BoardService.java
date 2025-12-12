@@ -23,7 +23,7 @@ public class BoardService {
 		 
 	 }
 	 
-	 public BoardListPaginDTO getList(int page, int size) {
+	 public BoardListPaginDTO getList(int page, int size, String typeStr, String keyword) {
 		 
 		 page = page<= 0 ? 1 : page;
 		 
@@ -39,11 +39,13 @@ public class BoardService {
 		  */
 		 int skip = (page - 1) * size;
 		 
-		 List<BoardDTO> list = boardMapper.list2(skip, size);
+		 String[] types = typeStr != null ? typeStr.split("") : null;
 		 
-		 int total = boardMapper.listCount();
+		 List<BoardDTO> list = boardMapper.listSearch(skip, size, types, keyword);
 		 
-		 return new BoardListPaginDTO(list, total, page, size);
+		 int total = boardMapper.listCountSearch(types, keyword);
+		 
+		 return new BoardListPaginDTO(list, total, page, size, typeStr, keyword);
 	 }
 
 	 public Long register(BoardDTO dto) {
