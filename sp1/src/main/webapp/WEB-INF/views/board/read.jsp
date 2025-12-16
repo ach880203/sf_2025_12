@@ -36,14 +36,19 @@
         </div>
 
         <div class="float-end">
-           <a href='/board/list'>
+           <c:url var="readUrl" value="/board/list">
+			  <c:param name="page" value="${page}" />
+			  <c:param name="size" value="${size}" />
+			  <c:param name="types" value="${types}" />
+			  <c:param name="keyword" value="${keyword}" />
+			</c:url>
+           <a href='${readUrl}'>
              <button type="button" class="btn btn-info btnList" >LIST</button>
-           </a>
-          
+           </a>  
           <c:if test="${!board.delFlag}">
             <a href='/board/modify/${board.bno}'>
-               <button type="button" class="btn btn-warning btnModify" >MODIFY</button>
-            </a>   
+            	<button type="button" class="btn btn-warning btnModify" >MODIFY</button>
+            </a>	
           </c:if>
         </div>
 
