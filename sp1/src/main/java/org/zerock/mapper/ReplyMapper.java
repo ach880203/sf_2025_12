@@ -18,4 +18,6 @@ public interface ReplyMapper {
 
 	List<ReplyDTO> listOfBoard(@Param("bno") Long bno, @Param("skip") int skip, @Param("limit") int limit);
 
+	int countOfBoard(Long bno);
+
 }

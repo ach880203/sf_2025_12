@@ -7,8 +7,16 @@
 <div class="row justify-content-center">
 	<div class="col-lg-12">
 		<div class="card shadow mb-4">
-			<div class="card-header py-3">
+			<!-- 
+				d-flex : dispaly: flex -> 자식 요소들을 한 줄로 배치 
+				justify-content-between : 가로 방향으로 정렬, 양끝으로 배분
+				align-items-center : 세로 방향 정렬
+			 -->
+			<div class="card-header py-3 d-flex  justify-content-between  align-items-center">
 				<h6 class="m-0 font-weight-bold text-primary">Board List</h6>
+				<a href="/board/register" class="btn btn-primary btn-sm">
+					등록
+				</a>
 			</div>
 			
 			<div class="card-body">
