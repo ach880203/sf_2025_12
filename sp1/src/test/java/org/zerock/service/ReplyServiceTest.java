@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.dto.ReplyDTO;
-import org.zerock.dto.ReplyListPagiNDTO;
+import org.zerock.dto.ReplyListPaginDTO;
+import org.zerock.mapper.BoardMapperTests;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @ExtendWith(SpringExtension.class)
@@ -23,10 +25,23 @@ class ReplyServiceTest {
 	@Test
 	void testList() {
 		
-		ReplyListPagiNDTO list = replyService.listOfBoard(49999L, 2, 10);
+		ReplyListPaginDTO list = replyService.listOfBoard(49999L, 2, 10);
+//		ReplyListPaginDTO list = replyService.listOfBoard(500000L, 2, 10);
 		
-		for(ReplyDTO dto :list.getReplyDTOList())
+		for(ReplyDTO dto : list.getReplyDTOList())
 			log.info(dto);
 	}
 
+	
+	@Test
+	void testDelete() {
+		replyService.remove(1000000);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

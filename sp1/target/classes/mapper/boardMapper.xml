@@ -51,33 +51,36 @@
   </select>
   
   
- <sql id="search">
-           
-           <if test="types != null and types.length > 0 and keyword != null 
-              and keyword != ''">
-           <foreach collection="types" item="type" open="and (" 
-              close=")" separator="or">
-              <if test='type.equals("T")'>
-                 title like concat('%', #{keyword}, '%')
-              </if>
-              <if test='type.equals("C")'>
-                 content like concat('%', #{keyword}, '%')
-              </if>
-              <if test='type.equals("W")'>
-                 writer like concat('%', #{keyword}, '%')
-              </if>
-           </foreach>
-        </if> 
-            
+  <sql id="search">
+   	  	
+   	  	<if test="types != null and types.length > 0 and keyword != null 
+   	  		and keyword != ''">
+	  		<foreach collection="types" item="type" open="and (" 
+	  			close=")" separator="or">
+	  			<if test='type.equals("T")'>
+	  				title like concat('%', #{keyword}, '%')
+	  			</if>
+	  			<if test='type.equals("C")'>
+	  				content like concat('%', #{keyword}, '%')
+	  			</if>
+	  			<if test='type.equals("W")'>
+	  				writer like concat('%', #{keyword}, '%')
+	  			</if>
+	  		</foreach>
+	  	</if> 
+	  	 	
   </sql>
   
   <select id="listSearch" resultType="BoardDTO">
-  	select bno, title, writer, regDate 
-  	from tbl_board
-  	where delflag = false
+  	select  b.bno, b.title, b.content, b.writer, b.regdate, 
+		    b.updatedate, count(rno) as replyCnt 
+  	from tbl_board b
+  	left join tbl_reply r
+  	on b.bno = r.bno  	
   	
   	<include refid="search"></include>
   	
+  	group by b.bno 
   	order by bno desc
   	limit #{skip}, #{count}
   </select>
@@ -91,3 +94,21 @@
   	
   </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

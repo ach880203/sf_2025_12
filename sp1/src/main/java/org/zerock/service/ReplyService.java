@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.zerock.dto.ReplyDTO;
-import org.zerock.dto.ReplyListPagiNDTO;
+import org.zerock.dto.ReplyListPaginDTO;
 import org.zerock.mapper.ReplyMapper;
 import org.zerock.service.exception.ReplyException;
 
@@ -13,15 +13,15 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-@RequiredArgsConstructor
+@RequiredArgsConstructor  //생성자 주입
 public class ReplyService {
-
+	
 	private final ReplyMapper replyMapper;
 	
 	public void add(ReplyDTO replyDTO) {
 		
 		try {
-		   replyMapper.insert(replyDTO);
+			replyMapper.insert(replyDTO);
 		}catch(Exception e) {
 			throw new ReplyException(500, "Insert Error");
 		}
@@ -31,12 +31,13 @@ public class ReplyService {
 		
 		try {
 			return replyMapper.read(rno);
-		}catch (Exception e) {
+		}catch(Exception e) {
 			throw new ReplyException(404, "Not Found");
 		}
 	}
 	
-	public void modify(ReplyDTO replyDTO) {
+	public void  modify(ReplyDTO replyDTO) {
+		
 		try {
 			int count = replyMapper.update(replyDTO);
 			
@@ -44,11 +45,12 @@ public class ReplyService {
 				throw new ReplyException(404, "Not Found");
 			}
 		}catch(Exception e) {
-				throw new ReplyException(500, "Update Error");
-			}
+			throw new ReplyException(500, "Update Error");
+		}
 	}
 	
-	public void remove(int rno) {
+	public void  remove(int rno) {
+		
 		try {
 			int count = replyMapper.delete(rno);
 			
@@ -56,21 +58,41 @@ public class ReplyService {
 				throw new ReplyException(404, "Not Found");
 			}
 		}catch(Exception e) {
-				throw new ReplyException(500, "Delete Error");
-			}
+			throw new ReplyException(500, "Delete Error");
+		}
 	}
 	
-	public ReplyListPagiNDTO listOfBoard(Long bno, int page, int size) {
+	public ReplyListPaginDTO listOfBoard(Long bno, int page, int size) {
 		try {
+			
 			int skip = (page-1) * size;
 			
 			List<ReplyDTO> replyDTOList = replyMapper.listOfBoard(bno, skip, size);
 			int count = replyMapper.countOfBoard(bno);
 			
-			return new ReplyListPagiNDTO(replyDTOList, count, page, size);
-			//return new ReplyListPagiNDTO(replyDTOList, count, page, size);
+			return new ReplyListPaginDTO(replyDTOList, count, page, size);
+			
 		}catch(Exception e) {
-			throw  new ReplyException(500, e.getMessage());
+			throw new ReplyException(500, e.getMessage());
 		}
 	}
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

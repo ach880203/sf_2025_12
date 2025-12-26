@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -23,19 +24,19 @@ public class BoardMapperTests {
 	@Test
 	public void testInsert() {
 		
-		/*
-		 * BoardDTO dto = new BoardDTO(); dto.setTitle("title");
-		 * dto.setContent("content"); dto.setWriter("user00");
-		 */
+//		BoardDTO dto = new BoardDTO();
+//		dto.setTitle("title");
+//		dto.setContent("content");
+//		dto.setWriter("user00");
 		
-		BoardDTO dto = BoardDTO.builder() //요즘 트렌드는 이모양이다.
-				.title("title1")
-				.content("content1")
-				.writer("writer1")
+		BoardDTO dto = BoardDTO.builder()
+				.title("title4")
+				.content("content4")
+				.writer("user04")				
 				.build();
 		
 		int insertCount = boardMapper.insert(dto);
-		log.info("-------------------------------------");
+		log.info("-----------------------------");
 		log.info("insertCount : " + insertCount);
 		
 		log.info("BNO : " + dto.getBno());
@@ -43,15 +44,14 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testSelectOne() {
-		BoardDTO boardDTO = boardMapper.selectOne(1L);
-		
-		log.info("boardDTO : " + boardDTO);
-		
+		 BoardDTO boardDTO = boardMapper.selectOne(1L);
+		 
+		 log.info("boardDTO : " + boardDTO);
 	}
 	
 	@Test
 	public void testDelete() {
-		int result = boardMapper.remove(2L);
+		int result = boardMapper.remove(1L);
 		
 		log.info("result : " + result);
 	}
@@ -60,50 +60,46 @@ public class BoardMapperTests {
 	public void testUpdate() {
 		BoardDTO dto = BoardDTO.builder()
 				.title("new title")
-				.content("new content")
+				.content("new Content")
 				.delFlag(false)
-				.bno(2L)
+				.bno(1L)
 				.build();
 		
 		int result = boardMapper.update(dto);
 		log.info("result : " + result);
-				
 	}
 	
 	@Test
 	public void testSelect() {
 		
-		/*
-		 * List<BoardDTO> list = boardMapper.list();
-		 * 
-		 * for(BoardDTO dto : list) log.info(dto);
-		 */
+		//List<BoardDTO> list = boardMapper.list();		
+		//for(BoardDTO dto : list)
+		//	log.info(dto);
 		
-		    //얘는 자바의 람다식
+		
 		boardMapper.list().forEach(dto->log.info(dto));
 		
-            //얘는 람다보다 더 줄인 버전.. 하지만 시인성이 좀 떨어지는 단점이 있다.		
-		//boardMapper.list().forEach(log::info);
 	}
 	
 	@Test
-	public void testpagining() {
-		 int page = 3;
-		 
-		  int skip = (page - 1) * 10;
-		  int count = 10;
-		  
-		  boardMapper.list2(skip,  count)
-		  .forEach(board-> log.info(board));
-		 
+	public void testPagining() {
+	
+		int page =3;
+		
+		//계산
+		int skip = (page - 1) * 10;
+		int count = 10;
+		
+		boardMapper.list2(skip, count)
+			.forEach(board-> log.info(board));
 	}
 	
 	@Test
 	public void testPagNums() {
-		//IntStream.rangeClosed(1, 5).boxed().forEach(i -> log.info(i));
+		
+//		IntStream.rangeClosed(1, 5).boxed().forEach(i -> log.info(i));
 		List<Integer> list = IntStream.rangeClosed(1, 5).boxed().toList();
 		log.info(list);
-		
 	}
 	
 	@Test
@@ -113,37 +109,26 @@ public class BoardMapperTests {
 		int skip = (page -1) * 10;
 		int count = 15;
 		
-        String[] types = new String[] {"T", "C", "W"};
+		String[] types = new String[] {"T","C"};
+		
+//		List<String> types = new ArrayList<String>();
+//		types.add("T");
+//		types.add("C");		
+		
 		String keyword = "test";
 		
 		boardMapper.listSearch(skip, count, types, keyword);
-		}
-	
-	
+	}
 	
 	@Test
 	public void testCount() {
 		
-		String[] types = new String[] {"T", "C"};
-		String keyword = "title";
+		
+		String[] types = new String[] {"T","C"};				
+		
+		String keyword = "수정";
 		
 		int result = boardMapper.listCountSearch(types, keyword);
 		log.info("전체 갯수 : " + result);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,23 +15,23 @@
 <body>
 
 <div class="container mt-3">
-  <h2>Stacked form</h2>
+  <h2>Member Register</h2>
   <form action="/member/register" method="post">
     <div class="mb-3 mt-3">
-      <label for="name">name:</label>
-      <input type="text" class="form-control" id="text" placeholder="Enter name" name="name">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
     </div>
-
     <div class="mb-3 mt-3">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
     </div>
     <div class="mb-3">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
     </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+   
+    <button type="submit" class="btn btn-primary">등록</button>
+    <button type="reset" class="btn btn-info">취소</button>
   </form>
 </div>
 

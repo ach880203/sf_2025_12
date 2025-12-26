@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     
 <%@include file="/WEB-INF/views/includes/header.jsp" %>
 
@@ -10,8 +11,10 @@
         <h6 class="m-0 font-weight-bold text-primary">Board Register</h6>
       </div>
       
+      
       <div class="card-body">
-				<form action="/board/register" method="post" class="p-3">
+				<form action="/board/register" method="post"   
+							enctype="application/x-www-form-urlencoded"  class="p-3">
 					<div class="mb-3">
 						<label class="form-label">Title</label> 
 						<input type="text" name="title" class="form-control">
@@ -24,7 +27,8 @@
 
 					<div class="mb-3">
 						<label class="form-label">Writer</label> <input type="text"
-							name="writer" class="form-control">
+							name="writer" class="form-control"
+							value='<sec:authentication property="principal.uid"/>'>
 					</div>
 
 					<div class="d-flex justify-content-end">
@@ -40,3 +44,4 @@
 
 
 <%@include file="/WEB-INF/views/includes/footer.jsp" %>
+

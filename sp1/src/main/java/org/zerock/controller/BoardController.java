@@ -2,9 +2,11 @@ package org.zerock.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,72 +24,96 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
-	
-	//생성자 주입(DI), @requiredArgConstructor 의해서
+
+	//생성자 주입(DI) , @RequiredArgsConstructor 의해서
 	private final BoardService boardService;
-
-	// localhost:8080/board/ex1 -> WEB-INF/ views / board / ex1.jsp
-
+	
+	/*
+	//localhost:8080/board/ex1 -> /WEB-INF/ views / board / ex1.jsp
+	@GetMapping("/ex1")
+	void ex1() {
+		
+	}
+	*/
+	
+	// localhost:8080/board/list
+	// -> /WEB-INF/ views / board / list.jsp
 	@GetMapping("/list")
 	public void list(
 			@RequestParam(name="page", defaultValue = "1") int page,
 			@RequestParam(name="size", defaultValue = "10") int size,
-			@RequestParam(name="types", required = false)String types,
-			@RequestParam(name="keyword", required = false)String keyword,
+			@RequestParam(name="types", required = false) String types,
+			@RequestParam(name="keyword", required = false) String keyword,			
 			Model model) {
-		log.info("board list");
 		
-		 BoardListPaginDTO list = boardService.getList(page, size, types, keyword);
-		 
-		 log.info("------------------------");
-		 log.info(list);
-		 
-		 model.addAttribute("dto", list);
-		 
-	}
+		BoardListPaginDTO list = boardService.getList(page, size,types,keyword);
+		
+		log.info("---------------------------------------");
+		log.info("types : " +  list.getKeyword());
+		log.info("keyword : " + list.getTypes());		
+		
+		model.addAttribute("dto", list);
+		
+//		model.addAttribute("list", boardService.getList());
 
-	// 등록화면
-	@GetMapping("register")
+	}
+	
+	//등록 화면
+	@GetMapping("/register")
 	public void register() {
 		log.info("board register");
 	}
-
-//등록처리
-	@PostMapping("register")
-	public String registerpost(BoardDTO dto, RedirectAttributes rttr) {
-		log.info("-----------------------");
+	
+	//등록 처리
+	@PostMapping("/register")
+	public String registerPost(BoardDTO dto, RedirectAttributes rttr) {
+		log.info("-------------------------------");
 		log.info("board register post");
 		
 		//게시글 등록하면 등록된 번호를 반환
-		Long bno = boardService.register(dto);
+		Long  bno = boardService.register(dto);
 		
-		/* 1회용(1번 요청에만 유지되는) 데이터를 전달하는 방식
-		 redirect 이후에 단 한 번만 사용할 값을 저장할 때 사용
-		 URL 파라미터로 노출되지 않아서 보안상 안전함
-		 예) 글 작성 후 "글번호", "성공 메시지" 등을 다음 화면에 잠깐 보여줄 때 활용
+		/* 
+		 * 	1회용(1번 요청에만 유지되는) 데이터를 전달하는 방식
+		 	redirect 이후에 단 한 번만 사용할 값을 저장할 때 사용
+		 	URL 파라미터로 노출되지 않아서 보안상 안전함
+		 	예) 글 작성 후 "글번호", "성공 메시지" 등을 다음 화면에 잠깐 보여줄 때 활용
 		*/
 		rttr.addFlashAttribute("result", bno);
 		
 		return "redirect:/board/list";
 	}
-
-	// 단건조회 localhost:8080/board/read/1 void로 요청을 주면 경로 그대로 따라가기때문에 에러가 난다.
-	// 보드에서 1번 데이터 보여주세요. 스트링으로 줌으로서 리턴을 이용해 read.jsp로 갈 수 있다.
-	// WEB-INF/ views / board / read.jsp
+	
+	//단건 조회	localhost:8080/board/read/12 
+	// db에서 1번 데이타 보여주세요
+	// -> /WEB-INF/ views / board / read.jsp
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/read/{bno}")
-	public String read(@PathVariable("bno") Long bno, Model model) {
+	public String read(@PathVariable("bno") Long bno,
+			@RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="size", defaultValue = "10") int size,
+			@RequestParam(name="types", required = false) String types,
+			@RequestParam(name="keyword", required = false) String keyword,
+			Model model) {
 		
 		BoardDTO dto = boardService.read(bno);
+		
 		model.addAttribute("board", dto);
-
+		model.addAttribute("page", page);
+	    model.addAttribute("size", size);
+	    model.addAttribute("types", types);
+	    model.addAttribute("keyword", keyword);
+		
 		return "/board/read";
+		
 	}
-
-	// 수정
-
+	
+	/*
+	 * 수정 폼
+	 * localhost:8080/board/modify/1 
+	 */
 	@GetMapping("/modify/{bno}")
 	public String modifyGet(@PathVariable("bno") Long bno, Model model) {
-
 		log.info("board modify get");
 		
 		BoardDTO dto = boardService.read(bno);
@@ -95,30 +121,31 @@ public class BoardController {
 		
 		return "board/modify";
 	}
-
+	
+	@PreAuthorize("authentication.name == #dto.writer")
 	@PostMapping("/modify")
-	public String modifyPost(BoardDTO dto) {
+	public String modifyPost(@ModelAttribute BoardDTO dto) {
 		log.info("board modify post");
 		
 		boardService.modify(dto);
-
-		return "redirect:/board/read/" + dto.getBno();
+		
+		return "redirect:/board/read/"+dto.getBno();
 	}
-
+	
 	/*
 	 * 삭제
-	 * 
+	 * localhost:8080/board/remove 
 	 */
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr){
-		log.info("board remove post");
+	public String remove(@RequestParam("bno") Long bno,
+			RedirectAttributes rttr) {
+	
+		log.info("board remove post : " + bno);
 		
 		boardService.remove(bno);
 		
 		rttr.addFlashAttribute("result", bno);
-		return "redirect:/board/list";
 		
+		return "redirect:/board/list";
 	}
-	
-	
 }

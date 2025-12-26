@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-	
+
 	private final MemberMapper mapper;
 	
 	public List<MemberDTO> getList(){
@@ -21,9 +21,9 @@ public class MemberService {
 	public MemberDTO memberById(int mno) {
 		return mapper.memberById(mno);
 	}
-
+	
 	public void update(MemberDTO dto) {
-	  mapper.update(dto);
+		mapper.update(dto);
 	}
 	
 	public void insert(MemberDTO dto) {
@@ -31,6 +31,6 @@ public class MemberService {
 	}
 	
 	public void delete(int mno) {
-		 mapper.delete(mno);
+		mapper.delete(mno);
 	}
 }

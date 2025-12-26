@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +34,15 @@ public class HelloController {
 	 * void : /WEB-INF/views/sample/ex1.jsp
 	 *      : /WEB-INF/views/sample/ex2.jsp
 	 */
-			
+	
+	@PreAuthorize("hasRole('USER')")
 	//localhost:8080/sample/ex1 -> void : /WEB-INF/views/sample/ex1.jsp
 	@GetMapping("/ex1")  //sample/ex1
 	public void ex1() {
 		log.info("/sample/ex1");
 	}
 
+	@PreAuthorize("hasRole('MANAGER')")
 	//localhost:8080/sample/ex2 -> String : /WEB-INF/views/sample/success.jsp
 	@GetMapping("/ex2")
 	public String ex2() {
@@ -47,6 +50,7 @@ public class HelloController {
 		return "sample/success";
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	//localhost:8080/sample/ex3 -> redirect -> localhost:8080/sample/ex3re
 	@GetMapping("/ex3")
 	public String ex3() {
@@ -71,10 +75,9 @@ public class HelloController {
 		log.info("name : " + name);		
 	}
 
-	
-	//http://local:8080/sample/ex4 , method:post
+	//http://localhost:8080/sample/ex4 , Method:Post
 	@PostMapping("/ex4")
-	public void ex4post(@RequestParam(name="n1", defaultValue = "1") int num,
+	public void ex4Post(@RequestParam(name="n1", defaultValue = "1") int num,
 			@RequestParam("name") String name) {
 		
 		log.info("num : " + num);
@@ -128,5 +131,9 @@ public class HelloController {
 		log.info("/sample/ex8");
 	}
 	
+	@GetMapping("/access-denied")
+	public String accessDenied(){
+		return "/sample/accessDenied";
+	}
 	
 }
