@@ -18,7 +18,7 @@ public class BoardService {
 	private final BoardMapper boardMapper;
 	
 	public List<BoardDTO> getList(){
-		
+		log.info("--------getlist1------------");
 		return boardMapper.list();
 	}
 	
@@ -26,6 +26,7 @@ public class BoardService {
 	public BoardListPaginDTO getList(int page, int size, 
 						String typeStr, String keyword) {
 		
+		log.info("--------getlist2------------");
 		page  = page <= 0 ? 1 : page;
 		
 		//해석? 
@@ -64,6 +65,7 @@ public class BoardService {
 
 	public BoardDTO read(Long bno) {
 		
+		log.info("--------read------------");
 		return boardMapper.selectOne(bno);
 	}
 
