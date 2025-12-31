@@ -72,7 +72,7 @@ public class CommunityMapperTests {
         String[] types = {"T", "C"};
         String keyword = "test";
 
-        communityMapper.selectList(skip, size, types, keyword)
+        communityMapper.listSearch(skip, size, types, keyword)
                 .forEach(dto -> log.info(dto));
     }
 
@@ -82,7 +82,7 @@ public class CommunityMapperTests {
         String[] types = {"T", "C"};
         String keyword = "test";
 
-        int total = communityMapper.selectCount(types, keyword);
+        int total = communityMapper.listCountSearch(types, keyword);
         log.info("total count: " + total);
     }
 }

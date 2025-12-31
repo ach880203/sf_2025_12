@@ -37,19 +37,18 @@ private final CommunityMapper communityMapper;
 		 * 
 		 */
 		
-		//3.skip rPtks
+		//3.skip 계산
 		int skip = (page - 1) * size;
 		
 		//4.검색 타입 분해
-		              // typeStr = "TC" => typeStr.split("") -> T|C
 		String[] types = typeStr != null ? typeStr.split("") : null;		
 		
 		//5. 목록 + 전체 개수
 		List<CommunityDTO> list =
-				communityMapper.selectList(skip, size, types, keyword );
+				communityMapper.listSearch(skip, size, types, keyword );
 		
 		int total = 
-				communityMapper.selectCount(types, keyword);
+				communityMapper.listCountSearch(types, keyword);
 		
 		return new CommunityListPaginDTO(
 				list, total, page, size, typeStr, keyword

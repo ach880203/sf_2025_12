@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -33,22 +34,23 @@ public class SecurityConfig {
         	
         	//정적 리소스
         	config.requestMatchers(
-        			"/rsourdes/**",
-        			"/css/**",
-        			"/js/**",
-        			"/images/**"
+        			new AntPathRequestMatcher("/rsources/**"),
+        			 new AntPathRequestMatcher("/css/**"),
+        			 new AntPathRequestMatcher("/js/**"),
+        			 new AntPathRequestMatcher("/images/**")
         			).permitAll();
         	
         	//공개 영역
         	config.requestMatchers(
-        			"/",
-        			"/comunity/**",
-        			"/account/login"
+        			 new AntPathRequestMatcher("/"),
+        			 new AntPathRequestMatcher("/community/**"),
+        			 new AntPathRequestMatcher("/account/login")
         			).permitAll();
         	
         	//개인 가계부
-        	config.requestMatchers("/ledger/**")
-        			.authenticated();
+        	config.requestMatchers(
+        			 new AntPathRequestMatcher("/ledger/**")
+        			).authenticated();
 
         	//그 외의 로그인 필요
         	config.anyRequest().authenticated();
@@ -72,7 +74,7 @@ public class SecurityConfig {
         http.logout(config -> {
         	config.deleteCookies("JSESSIONID", "remember-me");
             config.logoutUrl("/account/doLogout");  // 🔥 POST 로그아웃 URL
-            config.logoutSuccessUrl("/account/logoutSuccess");  // 🔥 완료 페이지
+            config.logoutSuccessUrl("/account/login?logout");  // 🔥 완료 페이지
         });
         
         //5. 예외 처리

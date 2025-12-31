@@ -24,14 +24,14 @@ public interface CommunityMapper {
 	 * types : TCW ->   T|C|W
 	 * keyword : 스프링 검색
 	 */
-	List<CommunityDTO> selectList( 
+	List<CommunityDTO> listSearch( 
 			@Param("skip") int skip,
 			@Param("count") int count,
 			@Param("types") String[] types,
 			@Param("keyword") String keyword
 	);
 	
-	int selectCount(
+	int listCountSearch(
 				@Param("types") String[] types,
 				@Param("keyword") String keyword
 			);

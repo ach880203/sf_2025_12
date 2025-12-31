@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.mapper.ComunityReplyMapper">
+<mapper namespace="org.zerock.reply.CommunityReplyMapper">
+
   
   <insert id="insert">
   	
@@ -15,7 +16,7 @@
   	values(#{bno}, #{replyText}, #{replyer})
   </insert>
   
-  <select id="read" resultType="ComunityReplyDTO">
+  <select id="read" resultType="CommunityReplyDTO">
   	select * from tbl_reply 
   	where rno = #{rno}
   </select>
@@ -32,7 +33,7 @@
   	where rno = #{rno}
   </update>
   
-  <select id="listOfBoard" resultType="ComunityReplyDTO">  
+  <select id="listOfBoard" resultType="CommunityReplyDTO">  
   	select * from tbl_reply
   	where bno = #{bno} and rno>0  and delflag=false
   	order by rno asc

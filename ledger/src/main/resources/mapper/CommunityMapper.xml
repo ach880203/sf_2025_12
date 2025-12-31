@@ -10,7 +10,7 @@
   		select LAST_INSERT_ID()
   	</selectKey>
   
-	  insert into tbl_communuty(title,content, writer)
+	  insert into tbl_community(title,content, writer)
 	  values (#{title}, #{content}, #{writer})
   </insert>
   
@@ -56,17 +56,23 @@
 
   <!-- 커뮤니티 목록 (검색 + 페이징 + 댓글 수) -->
   <select id="listSearch" resultType="org.zerock.community.CommunityDTO">
-  	select  b.bno, b.title, b.content, b.writer, 
-  			b.regdate as regDate, 
-		    b.updatedate as updateDate, 
-		    count(r.rno) as replyCnt 
-  	from tbl_community c
-  	left join tbl_comunityReply r
-  	  on c.bno = r.bno and r.delflag = false 	
-  	<include refid="search"></include>
-  	group by c.bno 
-  	order by c.bno desc
-  	limit #{skip}, #{count}
+    select
+        c.bno,
+        c.title,
+        c.content,
+        c.writer,
+        c.regdate as regDate,
+        c.updatedate as updateDate,
+        count(r.rno) as replyCnt
+    from tbl_community c
+    left join tbl_community_reply r
+        on c.bno = r.bno
+        and r.delflag = false
+    where c.delflag = false
+    <include refid="search"/>
+    group by c.bno
+    order by c.bno desc
+    limit #{skip}, #{count}
   </select>
   
   <!-- 전체 개수 -->

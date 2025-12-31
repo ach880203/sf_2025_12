@@ -87,7 +87,7 @@ public class CommunityController {
 		
 		CommunityDTO dto = communityService.read(bno);
 		
-		model.addAttribute("board", dto);
+		model.addAttribute("community", dto);
 		model.addAttribute("page", page);
 	    model.addAttribute("size", size);
 	    model.addAttribute("types", types);

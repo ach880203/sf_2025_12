@@ -1,46 +1,292 @@
-@charset "UTF-8";
-body {
-  min-height: 100vh;
+:root{
+  --gold-main: #f5c542;
+  --gold-soft: #fff1b8;
+  --bg-main: #fffdf6;
+  --text-main: #2e2e2e;
+  --text-sub: #777;
+}
+
+/* 공통 */
+body{
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* HEADER */
+.app-header{
+  height: 72px;
+  background: linear-gradient(135deg,#ffd84d,#f5b700);
+  box-shadow: 0 6px 20px rgba(245,197,66,.35);
+}
+
+.header-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
 }
 
-.navbar-custom {
-  height: 70px;
-  background-color: #0d6efd; /* Bootstrap primary blue */
+.logo{
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #3a2a00;
 }
 
-.navbar-custom .nav-link,
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-  color: #ffffff;
+.main-nav a{
+  margin: 0 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #3a2a00;
 }
 
-.main-wrapper {
-  flex: 1;
+.main-nav a:hover{
+  text-decoration: underline;
+}
+
+.auth-box{
   display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.sidebar {
-  width: 220px;
-  background-color: #0b5ed7; /* darker blue */
-  height: calc(100vh - 70px);
+.login-btn,
+.logout-btn{
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: #fff;
+  color: #3a2a00;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.sidebar .list-group-item {
-  background-color: transparent;
-  color: white;
-  border: none;
+.user-name{
+  font-size: 14px;
 }
 
-.sidebar .list-group-item:hover,
-.sidebar .list-group-item.active {
-  background-color: #0a58ca;
-  color: white;
+/* MAIN */
+.main-container{
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
 }
 
-.content {
-  flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
+/* FOOTER */
+.app-footer{
+  margin-top: 80px;
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+
+
+/* =========================
+   GoldenBook Community UI
+   ========================= */
+
+:root{
+  --gb-gold: #f5c542;
+  --gb-gold-2: #f5b700;
+  --gb-gold-soft: #fff1b8;
+  --gb-bg: #fffdf6;
+  --gb-card: rgba(255,255,255,0.85);
+  --gb-text: #2e2e2e;
+  --gb-sub: #777;
+  --gb-line: rgba(245,197,66,0.35);
+  --gb-shadow: 0 14px 40px rgba(245,197,66,0.18);
+}
+
+.main-container{
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.gb-page{
+  padding-bottom: 40px;
+}
+
+/* 카드(부트스트랩 card 덮어쓰기) */
+.card.gb-card{
+  border-radius: 22px;
+  background: var(--gb-card);
+  border: 2px solid rgba(255,241,184,0.9);
+  box-shadow: var(--gb-shadow);
+  overflow: hidden;
+}
+
+.gb-card-header{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 18px 18px;
+  background: linear-gradient(135deg, rgba(255,216,77,0.55), rgba(245,183,0,0.35));
+  border-bottom: 1px solid var(--gb-line);
+}
+
+.gb-card-title{
+  margin:0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #3a2a00;
+  letter-spacing: .2px;
+}
+
+.gb-card-body{
+  padding: 18px;
+}
+
+/* 버튼 통일 */
+.gb-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: 16px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .18s ease;
+}
+
+.gb-btn-primary{
+  background: linear-gradient(135deg, #ffd84d, #f5b700);
+  color: #3a2a00;
+  box-shadow: 0 10px 24px rgba(245,197,66,0.28);
+}
+
+.gb-btn-ghost{
+  background: #fff;
+  border: 2px solid rgba(245,197,66,0.35);
+  color: #3a2a00;
+}
+
+.gb-btn-danger{
+  background: #ffebee;
+  border: 2px solid rgba(255,0,0,0.15);
+  color: #b00020;
+}
+
+.gb-btn:hover{
+  transform: translateY(-1px);
+}
+
+/* 테이블(리스트) */
+.gb-table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.gb-table thead th{
+  font-size: 13px;
+  color: var(--gb-sub);
+  font-weight: 800;
+  padding: 10px 10px;
+}
+
+.gb-table tbody td{
+  background:#fff;
+  padding: 14px 10px;
+  border-top: 2px solid rgba(255,241,184,0.9);
+  border-bottom: 2px solid rgba(255,241,184,0.9);
+}
+
+.gb-table tbody tr td:first-child{
+  border-left: 2px solid rgba(255,241,184,0.9);
+  border-radius: 14px 0 0 14px;
+  width: 90px;
+  font-weight: 800;
+}
+
+.gb-table tbody tr td:last-child{
+  border-right: 2px solid rgba(255,241,184,0.9);
+  border-radius: 0 14px 14px 0;
+  width: 180px;
+  color: var(--gb-sub);
+}
+
+.gb-table a{
+  color: #d49b00;
+  font-weight: 800;
+  text-decoration: none;
+}
+.gb-table a:hover{
+  text-decoration: underline;
+}
+
+/* 툴바(검색) */
+.gb-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.gb-toolbar select,
+.gb-toolbar input{
+  border-radius: 14px !important;
+  border: 2px solid rgba(245,197,66,0.25) !important;
+  padding: 10px 12px !important;
+  background: #fff !important;
+}
+
+.gb-toolbar .searchBtn{
+  border-radius: 14px !important;
+  border: 0 !important;
+  background: linear-gradient(135deg, #ffd84d, #f5b700) !important;
+  color: #3a2a00 !important;
+  font-weight: 800 !important;
+}
+
+/* 페이징 */
+.pagination{
+  margin-top: 18px !important;
+}
+.pagination .page-link{
+  border-radius: 14px !important;
+  border: 2px solid rgba(245,197,66,0.25) !important;
+  color: #3a2a00 !important;
+  font-weight: 800;
+  margin: 0 3px;
+}
+.pagination .page-item.active .page-link{
+  background: linear-gradient(135deg, #ffd84d, #f5b700) !important;
+  border-color: transparent !important;
+}
+
+/* 폼(등록/읽기/수정) */
+.gb-form .input-group-text{
+  border-radius: 14px 0 0 14px !important;
+  border: 2px solid rgba(245,197,66,0.25) !important;
+  background: rgba(255,216,77,0.22) !important;
+  color: #3a2a00 !important;
+  font-weight: 800;
+}
+.gb-form .form-control,
+.gb-form textarea{
+  border-radius: 0 14px 14px 0 !important;
+  border: 2px solid rgba(245,197,66,0.25) !important;
+}
+.gb-form textarea{
+  min-height: 140px;
+  border-radius: 14px !important;
+}
+
+/* 댓글 영역 */
+.replyList .list-group-item{
+  border-radius: 16px;
+  border: 2px solid rgba(255,241,184,0.9);
+  margin-bottom: 10px;
 }

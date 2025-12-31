@@ -17,159 +17,151 @@
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
+    
+    :root {
+  --gold-main: #f5c542;
+  --gold-soft: #fff1b8;
+  --gold-light: #fff8dc;
 
-    body{
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  --cream-bg: #fffdf6;
+  --cream-card: rgba(255,255,255,0.78);
 
-        background: radial-gradient(circle at top, #5f4b22, #000000 70%);
-        color: #fff;
-        overflow: hidden;
-    }
+  --text-main: #2e2e2e;
+  --text-sub: #6b6b6b;
 
-    /* 반짝이는 금빛 애니메이션 */
-    .glow{
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(255,215,0,0.4), transparent 70%);
-        filter: blur(30px);
-        animation: move 6s infinite linear;
-        opacity: .5;
-    }
+  --shadow-soft: 0 15px 40px rgba(245,197,66,0.25);
+}
 
-    .glow:nth-child(1){ top: 10%; left: 20%; }
-    .glow:nth-child(2){ bottom: 10%; right: 15%; animation-delay: 2s; }
-    .glow:nth-child(3){ top: 50%; right: 40%; animation-delay: 4s; }
+   body{
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    @keyframes move{
-        0%{ transform: translateY(-20px); }
-        50%{ transform: translateY(20px); }
-        100%{ transform: translateY(-20px); }
-    }
+  background: radial-gradient(circle at top, #fff8dc, #fefefe 70%);
+  color: var(--text-main);
+}
 
-    .login-box{
-        width: 460px;
-        padding: 45px 40px;
-        background: rgba(0,0,0,0.35);
-        border-radius: 20px;
+/* 반짝이는 골드 파티클 */
+.glow{
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(245,197,66,0.35), transparent 70%);
+  filter: blur(35px);
+  animation: float 6s infinite ease-in-out;
+}
 
-        border: 1px solid rgba(255,215,0,0.28);
-        box-shadow: 
-            0 0 20px rgba(255,215,0,0.2),
-            inset 0 0 25px rgba(255,215,0,0.15);
+@keyframes float{
+  0%,100%{ transform: translateY(-15px);}
+  50%{ transform: translateY(15px);}
+}
 
-        backdrop-filter: blur(14px);
-        position: relative;
-        z-index: 10;
-        animation: fadeIn .8s ease-in-out;
-    }
+.login-box{
+  width: 460px;
+  padding: 46px 40px;
+  border-radius: 26px;
 
-    @keyframes fadeIn{
-        from{ opacity: 0; transform: translateY(20px);}
-        to{ opacity: 1; transform: translateY(0);}
-    }
+  background: var(--cream-card);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
 
-    .login-title{
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 10px;
-        font-weight: 700;
-        background: linear-gradient(135deg, #fff7c2, #ffda5c, #fff2a0);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+  border: 2px solid var(--gold-soft);
+  animation: pop .6s ease;
+}
 
-    .sub{
-        text-align: center;
-        opacity: .8;
-        margin-bottom: 25px;
-        font-size: 14px;
-    }
+@keyframes pop{
+  from{ transform: scale(.95); opacity: 0;}
+  to{ transform: scale(1); opacity: 1;}
+}
 
-    .input-group{
-        margin-bottom: 18px;
-        width: 100%;
-    }
+.login-title{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 6px;
 
-    .input-group label{
-        display: block;
-        margin-bottom: 6px;
-        font-size: 13px;
-        opacity: .9;
-    }
+  background: linear-gradient(135deg,#ffcf4d,#f5b700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .input-group input{
-        width: 100%;
-        padding: 13px 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,215,0,0.35);
-        outline: none;
-        background: rgba(0,0,0,0.35);
-        color: #fff;
-        font-size: 14px;
-        transition: .2s;
-    }
+.sub{
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 14px;
+  margin-bottom: 26px;
+}
 
-    .input-group input:focus{
-        background: rgba(0,0,0,0.55);
-        box-shadow: 0 0 12px rgba(255,215,0,0.4);
-    }
+.input-group label{
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: block;
+}
 
-    .login-btn{
-        width: 100%;
-        padding: 13px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
+.input-group input{
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 2px solid var(--gold-soft);
+  background: #fff;
+  font-size: 14px;
+  transition: .25s;
+}
 
-        background: linear-gradient(135deg,#ffbf00,#ffea8c,#ffbf00);
-        background-size: 200% 200%;
-        animation: shine 4s infinite linear;
+.input-group input:focus{
+  border-color: var(--gold-main);
+  box-shadow: 0 0 0 4px rgba(245,197,66,0.25);
+  outline: none;
+}
 
-        color: #000;
-        font-weight: 700;
-        margin-top: 10px;
-        transition: .2s;
-    }
+.login-btn{
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
 
-    @keyframes shine{
-        0%{ background-position: 0% 50%;}
-        50%{ background-position: 100% 50%;}
-        100%{ background-position: 0% 50%;}
-    }
+  background: linear-gradient(135deg,#ffd84d,#f5b700);
+  color: #3a2a00;
+  font-weight: 700;
+  font-size: 15px;
 
-    .login-btn:hover{
-        transform: scale(1.03);
-        box-shadow: 
-            0 10px 40px rgba(255,215,0,0.4),
-            inset 0 0 10px rgba(255,255,255,0.4);
-    }
+  cursor: pointer;
+  transition: .25s;
+}
 
-    .error-msg, .logout-msg{
-        padding: 10px 12px;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        font-size: 13px;
-    }
+.login-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(245,197,66,0.45);
+}
 
-    .error-msg{
-        background: rgba(255,0,0,0.25);
-    }
+.error-msg{
+  background: #ffe2e2;
+  color: #b00020;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
 
-    .logout-msg{
-        background: rgba(0,160,0,0.35);
-    }
+.logout-msg{
+  background: #e9ffe9;
+  color: #187a2a;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
 
-    .footer{
-        text-align: center;
-        margin-top: 22px;
-        opacity: .7;
-        font-size: 12px;
-    }
+.footer{
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}
+
 
 </style>
 </head>

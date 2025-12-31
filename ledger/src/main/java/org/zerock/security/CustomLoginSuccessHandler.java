@@ -17,7 +17,9 @@ import lombok.extern.log4j.Log4j2;
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+	public void onAuthenticationSuccess(
+			HttpServletRequest request, 
+			HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
 		log.info("-------------------------CustomLoginSuccessHandler--------------------------");
@@ -27,14 +29,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		authentication.getAuthorities().
 		forEach(auth -> log.info(auth.getAuthority().toString()));
 		
-		SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+		SavedRequest savedRequest = 
+				new HttpSessionRequestCache().getRequest(request, response);
 		
 		 log.info(savedRequest);
 		 
 		 if(savedRequest != null) {
 			 response.sendRedirect(savedRequest.getRedirectUrl());
 		 }else {
-			 response.sendRedirect("/board/list");
+			 response.sendRedirect("/community/list");
 		 }
 		 
 		

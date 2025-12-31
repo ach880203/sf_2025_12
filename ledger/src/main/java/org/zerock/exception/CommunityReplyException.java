@@ -5,13 +5,12 @@ import lombok.extern.log4j.Log4j2;
 
 @Getter
 @Log4j2
-public class CommunityReplyException  extends RuntimeException{
+public class CommunityReplyException extends RuntimeException {
 
-	private int code;
-	private String msg;
-	
-	public CommunityReplyException(int code, String msg) {
-		this.code = code;
-		this.msg = msg;
-	}
+    private final int code;
+
+    public CommunityReplyException(int code, String msg) {
+        super(msg);   // ⭐ 핵심
+        this.code = code;
+    }
 }

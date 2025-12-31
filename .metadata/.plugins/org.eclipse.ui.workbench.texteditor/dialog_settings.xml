@@ -10,9 +10,11 @@
 		<item key="isRegEx" value="false"/>
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="modify"/>
+			<item value="board"/>
+			<item value="comunity"/>
 			<item value="h6"/>
 			<item value="replymapper"/>
-			<item value="comunity"/>
 			<item value="not found"/>
 			<item value="account"/>
 			<item value="data-rno"/>
