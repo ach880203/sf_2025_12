@@ -2,65 +2,74 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="org.zerock.reply.CommunityReplyMapper">
 
-  
+  <!-- 댓글 등록 -->
   <insert id="insert">
-  	
-  	<selectKey order="AFTER" keyProperty="rno"
-  		resultType="int">
-  		select last_insert_id()
-  	</selectKey>
-  
-  	insert into tbl_reply(bno, replytext, replyer)
-  	values(#{bno}, #{replyText}, #{replyer})
+    <selectKey keyProperty="rno" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO tbl_community_reply
+      (bno, replyText, replyer)
+    VALUES
+      (#{bno}, #{replyText}, #{replyer})
   </insert>
-  
+
+  <!-- 댓글 단건 조회 -->
   <select id="read" resultType="CommunityReplyDTO">
-  	select * from tbl_reply 
-  	where rno = #{rno}
+    SELECT
+      rno,
+      replyText,
+      replyer,
+      replydate AS replyDate,
+      updatedate AS updateDate,
+      delflag,
+      bno
+    FROM tbl_community_reply
+    WHERE rno = #{rno}
+      AND delflag = false
   </select>
-  
-  <delete id="delete">
-    update tbl_reply
-    set delflag = true 
-    where rno = #{rno}
-  </delete>
-  
+
+  <!-- 댓글 수정 -->
   <update id="update">
-  	update tbl_reply
-  	set replyText = #{replyText}
-  	where rno = #{rno}
+    UPDATE tbl_community_reply
+    SET replyText = #{replyText}
+    WHERE rno = #{rno}
+      AND delflag = false
   </update>
-  
-  <select id="listOfBoard" resultType="CommunityReplyDTO">  
-  	select * from tbl_reply
-  	where bno = #{bno} and rno>0  and delflag=false
-  	order by rno asc
-  	limit #{limit} offset #{skip}
+
+  <!-- 댓글 삭제 (soft delete) -->
+  <update id="delete">
+    UPDATE tbl_community_reply
+    SET delflag = true
+    WHERE rno = #{rno}
+      AND delflag = false
+  </update>
+
+  <!-- 댓글 목록 + 페이징 -->
+  <select id="listOfBoard" resultType="CommunityReplyDTO">
+    SELECT
+      rno,
+      replyText,
+      replyer,
+      replydate AS replyDate,
+      updatedate AS updateDate,
+      delflag,
+      bno
+    FROM tbl_community_reply
+    WHERE bno = #{bno}
+      AND delflag = false
+    ORDER BY rno DESC
+    LIMIT #{limit} OFFSET #{skip}
   </select>
-  
+
+  <!-- 댓글 개수 -->
   <select id="countOfBoard" resultType="int">
-  	select count(rno) from tbl_reply
-  	where bno = #{bno} and rno > 0 and delflag=false
+    SELECT COUNT(rno)
+    FROM tbl_community_reply
+    WHERE bno = #{bno}
+      AND delflag = false
   </select>
-  
+
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

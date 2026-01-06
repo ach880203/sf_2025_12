@@ -290,3 +290,99 @@ body{
   border: 2px solid rgba(255,241,184,0.9);
   margin-bottom: 10px;
 }
+
+/* ===== GoldenBook Home ===== */
+.main-container { min-height: calc(100vh - 140px); } /* 헤더/푸터 높이에 맞게 대충 */
+
+.gb-hero{
+  background: radial-gradient(circle at 20% 20%, rgba(255, 226, 145, 0.45), transparent 55%),
+              radial-gradient(circle at 80% 10%, rgba(255, 244, 200, 0.35), transparent 60%),
+              linear-gradient(180deg, #1b1b1b 0%, #0f0f0f 100%);
+  color: #fff;
+}
+
+.gb-badge{
+  display:inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 210, 110, 0.14);
+  border: 1px solid rgba(255, 210, 110, 0.35);
+  color:#ffe7b6;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.gb-title{
+  font-size: 46px;
+  line-height: 1.15;
+  font-weight: 800;
+  margin: 0;
+}
+
+.gb-title-accent{
+  background: linear-gradient(90deg, #fff2b0, #ffd36a, #f2b93b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gb-sub{
+  color: rgba(255,255,255,0.78);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.btn-gold{
+  background: linear-gradient(90deg, #fff2b0, #ffd36a, #f2b93b);
+  border: 0;
+  color: #2b1a00;
+  font-weight: 800;
+  padding: 10px 16px;
+}
+.btn-gold:hover{ filter: brightness(1.03); color:#2b1a00; }
+
+.btn-outline-gold{
+  border: 1px solid rgba(255, 211, 106, 0.7);
+  color: #ffe7b6;
+  font-weight: 700;
+  padding: 10px 16px;
+}
+.btn-outline-gold:hover{
+  background: rgba(255, 211, 106, 0.12);
+  color: #fff2b0;
+}
+
+.gb-welcome{
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 211, 106, 0.12);
+  border: 1px solid rgba(255, 211, 106, 0.25);
+  color: #fff2c6;
+}
+
+.gb-pig-wrap{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 24px;
+  background: rgba(255, 211, 106, 0.08);
+  border: 1px solid rgba(255, 211, 106, 0.18);
+}
+
+.gb-pig{ width: 100%; max-width: 360px; height: auto; }
+.gb-pig-caption{ color: rgba(255,255,255,0.75); font-weight: 600; }
+
+.gb-card{
+  padding: 16px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 211, 106, 0.14);
+  backdrop-filter: blur(6px);
+  min-height: 110px;
+}
+.gb-card-title{ font-weight: 800; color: #fff2c6; margin-bottom: 6px; }
+.gb-card-desc{ color: rgba(255,255,255,0.74); line-height: 1.5; }
+

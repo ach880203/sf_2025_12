@@ -41,9 +41,9 @@ public class AccountDTO implements UserDetails{
 			return List.of();
 		}
 		// USER, MANAGER, ADMIN
-		return roleNames.stream().map(role -> 
-					new SimpleGrantedAuthority("ROLE_" + role.name()))
-					.collect(Collectors.toList());
+		return roleNames.stream()
+				.map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+				.collect(Collectors.toList());
 	}
                      // Collectors -> import java.util.stream.Collectors;
 	
@@ -54,7 +54,7 @@ public class AccountDTO implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return uname;
+		return uid;
 	}
 	
 	

@@ -4,23 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-
-
 public interface CommunityReplyMapper {
-	
-	int insert(CommunityReplyDTO communityReplyDTO);
-	
-	CommunityReplyDTO read(@Param("rno") int rno);
 
-	int delete(@Param("rno") int rno);
-	
-	int update(CommunityReplyDTO communityReplyDTO);
-	
-	List<CommunityReplyDTO> listOfBoard(
-			@Param("bno") Long bno,
-			@Param("skip") int skip,
-			@Param("limit") int  limit			
-			);
+    int insert(CommunityReplyDTO dto);
 
-	int countOfBoard(Long bno);
+    CommunityReplyDTO read(@Param("rno") int rno);
+
+    int update(CommunityReplyDTO dto);
+
+    int delete(@Param("rno") int rno); // soft delete
+
+    List<CommunityReplyDTO> listOfBoard(
+            @Param("bno") Long bno,
+            @Param("skip") int skip,
+            @Param("limit") int limit);
+
+    int countOfBoard(Long bno);
 }

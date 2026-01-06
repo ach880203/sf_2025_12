@@ -25,7 +25,7 @@ class ReplyMapperTests {
 	public void testInsert() {
 		
 		CommunityReplyDTO communityReplyDTO = CommunityReplyDTO.builder()
-				.bno(11665218L)
+				.bno(26387L)
 				.replyText("댓글 내용3")
 				.replyer("박길동")
 				.build();
@@ -60,7 +60,7 @@ class ReplyMapperTests {
 	
 	@Test
 	public void testInserts() {
-		long[] bnos = {11665218L, 11665217L, 49999L };
+		long[] bnos = {26387L, 26386L, 26385L };
 		
 		for(Long bno : bnos) {
 			for(int i=0; i<100; i++) {

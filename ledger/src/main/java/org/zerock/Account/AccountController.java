@@ -1,5 +1,6 @@
 package org.zerock.Account;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +27,10 @@ public class AccountController {
     @GetMapping("/logoutSuccess")
     public void logoutSuccessGET(){
         log.info("LOGOUT SUCCESS PAGE");
+    }
+    
+    @GetMapping("")
+    public ResponseEntity<Void> emptyGet(){
+    	return ResponseEntity.noContent().build();
     }
 }

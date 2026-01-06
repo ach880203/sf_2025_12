@@ -18,9 +18,6 @@ create table tbl_community_reply(
     select * from tbl_community_reply
     order by bno desc;
     
-    select * from tbl_community_reply
-    order by bno desc;
-    
     desc tbl_community_reply;
     
     select * from tbl_community_reply

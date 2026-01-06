@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <%
-	response.sendRedirect(request.getContextPath() + "/community/list");
+	response.sendRedirect(request.getContextPath() + "/home");
 %>

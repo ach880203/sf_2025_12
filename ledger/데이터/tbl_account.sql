@@ -33,3 +33,5 @@ CREATE TABLE persistent_logins (
 );
 
 select * from persistent_logins;
+
+SELECT DATABASE();

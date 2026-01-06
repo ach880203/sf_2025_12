@@ -36,7 +36,7 @@ class CommunityReplyServiceTest {
 	
 	@Test
 	void testDelete() {
-		communityReplyService.remove(1000000);
+		communityReplyService.remove(1000000, null);
 	}
 	
 	
